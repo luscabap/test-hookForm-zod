@@ -11,7 +11,8 @@ export const useCep = () => {
     formState: { errors },
     handleSubmit,
     watch,
-    setValue
+    setValue,
+    reset
   } = useForm<FormProps>({
     resolver: zodResolver(schemaForm),
     defaultValues: {
@@ -30,6 +31,7 @@ export const useCep = () => {
 
   const aoSubmeter = (data: FormProps) => {
     console.log(data);
+    reset();
   }
 
   const handleValues = useCallback((data: ApiCepProps) => {
