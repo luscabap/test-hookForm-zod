@@ -1,35 +1,10 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { ContainerCampo } from "./components/ContainerCampo";
 import { ErrorMessage } from "./components/ErrorMessage";
 import { useCep } from "./hooks/useCep";
 
-const schemaForm = z.object({
-  nome: z.string().min(1, 'O Campo Nome obrigatório'),
-  email: z.string().min(1, 'O campo E-mail é obrigatório').email('Digite um e-mail válido'),
-  cep: z.string().min(1, 'O campo CEP é obrigatório'),
-  rua: z.string().min(1, 'O campo Rua é obrigatório'),
-  bairro: z.string().min(1, 'O campo Bairro é obrigatório'),
-  cidade: z.string().min(1, 'O campo Cidade é obrigatório'),
-  estado: z.string().min(1, 'O campo Estado é obrigatório'),
-  celular: z.string().min(1, 'O campo Celular é obrigatório')
-})
-
-type FormProps = z.infer<typeof schemaForm>
-
 function App() {
-  const { register, formState: { errors }, handleSubmit, watch } = useForm<FormProps>({
-    resolver: zodResolver(schemaForm)
-  });
+  const { handleSubmit, aoSubmeter, register, errors } = useCep();
 
-  function aoSubmeter(data: FormProps) {
-    console.log(data)
-  }
-
-  const cepDigitado = watch('cep');
-  const { buscaCep } = useCep();
-  
   return (
     <div className="flex flex-col justify-center items-center">
       <h1 className="mb-5 mt-5">Form WebSite</h1>
@@ -40,61 +15,60 @@ function App() {
             children={<input
               type="text"
               placeholder="Digite o seu nome"
-              {...register("nome")}
+              {...register("endereco.nome")}
               className="bg-slate-600 p-2 w-full"
             />}
           />
-          {errors.nome?.message && (
-            <ErrorMessage>{errors.nome?.message}</ErrorMessage>
+          {errors.endereco?.nome?.message && (
+            <ErrorMessage>{errors.endereco?.nome?.message}</ErrorMessage>
           )}
           <ContainerCampo
             textoLabel="E-mail"
             children={<input
               type="text"
               placeholder="Digite o seu e-mail"
-              {...register("email")}
+              {...register("endereco.email")}
               className="bg-slate-600 p-2 w-full"
             />}
           />
-          {errors.email?.message && (
-            <ErrorMessage>{errors.email?.message}</ErrorMessage>
+          {errors.endereco?.email?.message && (
+            <ErrorMessage>{errors.endereco?.email?.message}</ErrorMessage>
           )}
           <ContainerCampo
             textoLabel="CEP"
             children={<input
               type="text"
               placeholder="Digite o seu CEP"
-              {...register("cep")}
+              {...register("endereco.cep")}
               className="bg-slate-600 p-2 w-full"
             />}
           />
-          <button className="bg-sky-900 p-5" onClick={() => buscaCep(cepDigitado)}>Pesquisar</button>
-          {errors.cep?.message && (
-            <ErrorMessage>{errors.cep?.message}</ErrorMessage>
+          {errors.endereco?.cep?.message && (
+            <ErrorMessage>{errors.endereco?.cep?.message}</ErrorMessage>
           )}
           <ContainerCampo
             textoLabel="Rua"
             children={<input
               type="text"
-              placeholder="Digite o nome da rua"
-              {...register("rua")}
+              placeholder="Digite o seu Rua"
+              {...register("endereco.rua")}
               className="bg-slate-600 p-2 w-full"
             />}
           />
-          {errors.rua?.message && (
-            <ErrorMessage>{errors.rua?.message}</ErrorMessage>
+          {errors.endereco?.rua?.message && (
+            <ErrorMessage>{errors.endereco?.rua?.message}</ErrorMessage>
           )}
           <ContainerCampo
             textoLabel="Bairro"
             children={<input
               type="text"
-              placeholder="Digite o seu bairro"
-              {...register("bairro")}
+              placeholder="Digite o seu Bairro"
+              {...register("endereco.bairro")}
               className="bg-slate-600 p-2 w-full"
             />}
           />
-          {errors.bairro?.message && (
-            <ErrorMessage>{errors.bairro?.message}</ErrorMessage>
+          {errors.endereco?.bairro?.message && (
+            <ErrorMessage>{errors.endereco?.bairro?.message}</ErrorMessage>
           )}
           <div className="flex justify-between gap-4">
             <div className="flex flex-col gap-4">
@@ -102,13 +76,13 @@ function App() {
                 textoLabel="Cidade"
                 children={<input
                   type="text"
-                  placeholder="Digite a sua cidade"
-                  {...register("cidade")}
+                  placeholder="Digite o seu Cidade"
+                  {...register("endereco.cidade")}
                   className="bg-slate-600 p-2 w-full"
                 />}
               />
-              {errors.cidade?.message && (
-                <ErrorMessage>{errors.cidade?.message}</ErrorMessage>
+              {errors.endereco?.cidade?.message && (
+                <ErrorMessage>{errors.endereco?.cidade?.message}</ErrorMessage>
               )}
             </div>
             <div className="flex flex-col gap-4">
@@ -116,13 +90,13 @@ function App() {
                 textoLabel="Estado"
                 children={<input
                   type="text"
-                  placeholder="Digite o seu estado"
-                  {...register("estado")}
+                  placeholder="Digite o seu Estado"
+                  {...register("endereco.estado")}
                   className="bg-slate-600 p-2 w-full"
                 />}
               />
-              {errors.estado?.message && (
-                <ErrorMessage>{errors.estado?.message}</ErrorMessage>
+              {errors.endereco?.estado?.message && (
+                <ErrorMessage>{errors.endereco?.estado?.message}</ErrorMessage>
               )}
             </div>
           </div>
@@ -130,18 +104,20 @@ function App() {
             textoLabel="Celular"
             children={<input
               type="text"
-              placeholder="Digite o seu número de celular"
-              {...register("celular")}
+              placeholder="Digite o seu Celular"
+              {...register("endereco.celular")}
               className="bg-slate-600 p-2 w-full"
             />}
           />
-          {errors.celular?.message && (
-            <ErrorMessage>{errors.celular?.message}</ErrorMessage>
+          {errors.endereco?.celular?.message && (
+            <ErrorMessage>{errors.endereco?.celular?.message}</ErrorMessage>
           )}
         </div>
 
         <div className="w-full">
-          <button type="submit" className="bg-sky-950 p-5 w-full mt-5 transition-colors	 hover:bg-sky-700">Enviar</button>
+          <button type="submit" className="bg-sky-950 p-5 w-full mt-5 transition-colors	 hover:bg-sky-700">
+            Enviar
+          </button>
         </div>
       </form>
     </div>
