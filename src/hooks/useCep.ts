@@ -34,8 +34,6 @@ export const useCep = () => {
     }
   });
 
-  console.log(errors)
-
   const aoSubmeter = (data: FormProps) => {
     console.log(data);
     reset();
@@ -49,9 +47,13 @@ export const useCep = () => {
   }, [setValue])
 
   const buscaCep = useCallback(async (cep: string) => {
-    const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-    const data = await response.json();
-    handleValues(data)
+    try {
+      const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+      const data = await response.json();
+      handleValues(data)
+    } catch(error) {
+      console.error(error)
+    }
   }, [handleValues]);
  
   const cepDigitado = watch("endereco.cep");

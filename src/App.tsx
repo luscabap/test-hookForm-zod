@@ -5,6 +5,9 @@ import { useCep } from "./hooks/useCep";
 function App() {
   const { handleSubmit, aoSubmeter, register, errors } = useCep();
 
+  const stylesInput = `bg-slate-600 p-2 w-full rounded-md
+  ${errors.endereco?.nome?.message ? 'border-red-900 border-2 border-solid' : ''}`
+
   return (
     <div className="flex flex-col justify-center items-center">
       <h1 className="mb-5 mt-5">Form WebSite</h1>
@@ -16,7 +19,7 @@ function App() {
               type="text"
               placeholder="Digite o seu nome"
               {...register("endereco.nome")}
-              className="bg-slate-600 p-2 w-full rounded-md"
+              className={stylesInput}
             />}
           />
           {errors.endereco?.nome?.message && (
@@ -28,7 +31,7 @@ function App() {
               type="text"
               placeholder="Digite o seu e-mail"
               {...register("endereco.email")}
-              className="bg-slate-600 p-2 w-full rounded-md"
+              className={stylesInput}
             />}
           />
           {errors.endereco?.email?.message && (
@@ -40,7 +43,7 @@ function App() {
               type="text"
               placeholder="Digite o seu CEP"
               {...register("endereco.cep")}
-              className="bg-slate-600 p-2 w-full rounded-md"
+              className={stylesInput}
             />}
           />
           {errors.endereco?.cep?.message && (
@@ -52,7 +55,7 @@ function App() {
               type="text"
               placeholder="Digite o seu Rua"
               {...register("endereco.rua")}
-              className="bg-slate-600 p-2 w-full rounded-md"
+              className={stylesInput}
             />}
           />
           {errors.endereco?.rua?.message && (
@@ -64,7 +67,7 @@ function App() {
               type="text"
               placeholder="Digite o seu Bairro"
               {...register("endereco.bairro")}
-              className="bg-slate-600 p-2 w-full rounded-md"
+              className={stylesInput}
             />}
           />
           {errors.endereco?.bairro?.message && (
@@ -78,7 +81,7 @@ function App() {
                   type="text"
                   placeholder="Digite o seu Cidade"
                   {...register("endereco.cidade")}
-                  className="bg-slate-600 p-2 w-full rounded-md"
+                  className={stylesInput}
                 />}
               />
               {errors.endereco?.cidade?.message && (
@@ -92,7 +95,7 @@ function App() {
                   type="text"
                   placeholder="Digite o seu Estado"
                   {...register("endereco.estado")}
-                  className="bg-slate-600 p-2 w-full rounded-md"
+                  className={stylesInput}
                 />}
               />
               {errors.endereco?.estado?.message && (
@@ -106,7 +109,7 @@ function App() {
               type="text"
               placeholder="Digite o seu Celular"
               {...register("endereco.celular")}
-              className="bg-slate-600 p-2 w-full rounded-md"
+              className={stylesInput}
             />}
           />
           {errors.endereco?.celular?.message && (
@@ -118,7 +121,7 @@ function App() {
               type="password"
               placeholder="Digite a sua senha"
               {...register("endereco.senhas.senha")}
-              className="bg-slate-600 p-2 w-full rounded-md"
+              className={stylesInput}
             />}
           />
           {errors.endereco?.senhas?.senha?.message && (
@@ -130,7 +133,7 @@ function App() {
               type="password"
               placeholder="Confirme a sua senha"
               {...register("endereco.senhas.senhaConfirmada")}
-              className="bg-slate-600 p-2 w-full rounded-md"
+              className={stylesInput}
             />}
           />
           {errors.endereco?.senhas?.senhaConfirmada?.message && (
