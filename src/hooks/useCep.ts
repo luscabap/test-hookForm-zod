@@ -14,6 +14,7 @@ export const useCep = () => {
     setValue,
     reset
   } = useForm<FormProps>({
+    mode: "all",
     resolver: zodResolver(schemaForm),
     defaultValues: {
         endereco: {
@@ -24,10 +25,16 @@ export const useCep = () => {
             email: "",
             estado: "",
             nome: "",
-            rua: ""
+            rua: "",
+            senhas: {
+              senha: "",
+              senhaConfirmada: ""
+            }
         }
     }
   });
+
+  console.log(errors)
 
   const aoSubmeter = (data: FormProps) => {
     console.log(data);

@@ -16,7 +16,7 @@ function App() {
               type="text"
               placeholder="Digite o seu nome"
               {...register("endereco.nome")}
-              className="bg-slate-600 p-2 w-full"
+              className="bg-slate-600 p-2 w-full rounded-md"
             />}
           />
           {errors.endereco?.nome?.message && (
@@ -28,7 +28,7 @@ function App() {
               type="text"
               placeholder="Digite o seu e-mail"
               {...register("endereco.email")}
-              className="bg-slate-600 p-2 w-full"
+              className="bg-slate-600 p-2 w-full rounded-md"
             />}
           />
           {errors.endereco?.email?.message && (
@@ -40,7 +40,7 @@ function App() {
               type="text"
               placeholder="Digite o seu CEP"
               {...register("endereco.cep")}
-              className="bg-slate-600 p-2 w-full"
+              className="bg-slate-600 p-2 w-full rounded-md"
             />}
           />
           {errors.endereco?.cep?.message && (
@@ -52,7 +52,7 @@ function App() {
               type="text"
               placeholder="Digite o seu Rua"
               {...register("endereco.rua")}
-              className="bg-slate-600 p-2 w-full"
+              className="bg-slate-600 p-2 w-full rounded-md"
             />}
           />
           {errors.endereco?.rua?.message && (
@@ -64,7 +64,7 @@ function App() {
               type="text"
               placeholder="Digite o seu Bairro"
               {...register("endereco.bairro")}
-              className="bg-slate-600 p-2 w-full"
+              className="bg-slate-600 p-2 w-full rounded-md"
             />}
           />
           {errors.endereco?.bairro?.message && (
@@ -78,7 +78,7 @@ function App() {
                   type="text"
                   placeholder="Digite o seu Cidade"
                   {...register("endereco.cidade")}
-                  className="bg-slate-600 p-2 w-full"
+                  className="bg-slate-600 p-2 w-full rounded-md"
                 />}
               />
               {errors.endereco?.cidade?.message && (
@@ -92,7 +92,7 @@ function App() {
                   type="text"
                   placeholder="Digite o seu Estado"
                   {...register("endereco.estado")}
-                  className="bg-slate-600 p-2 w-full"
+                  className="bg-slate-600 p-2 w-full rounded-md"
                 />}
               />
               {errors.endereco?.estado?.message && (
@@ -106,17 +106,40 @@ function App() {
               type="text"
               placeholder="Digite o seu Celular"
               {...register("endereco.celular")}
-              className="bg-slate-600 p-2 w-full"
+              className="bg-slate-600 p-2 w-full rounded-md"
             />}
           />
           {errors.endereco?.celular?.message && (
             <ErrorMessage>{errors.endereco?.celular?.message}</ErrorMessage>
           )}
+          <ContainerCampo
+            textoLabel="Senha"
+            children={<input
+              type="password"
+              placeholder="Digite a sua senha"
+              {...register("endereco.senhas.senha")}
+              className="bg-slate-600 p-2 w-full rounded-md"
+            />}
+          />
+          {errors.endereco?.senhas?.senha?.message && (
+            <ErrorMessage>{errors.endereco?.senhas?.senha?.message}</ErrorMessage>
+          )}
+          <ContainerCampo
+            textoLabel="Confirmar senha"
+            children={<input
+              type="password"
+              placeholder="Confirme a sua senha"
+              {...register("endereco.senhas.senhaConfirmada")}
+              className="bg-slate-600 p-2 w-full rounded-md"
+            />}
+          />
+          {errors.endereco?.senhas?.senhaConfirmada?.message && (
+            <ErrorMessage>{errors.endereco?.senhas?.senhaConfirmada?.message}</ErrorMessage>
+          )}
         </div>
-
         <div className="w-full">
           <button type="submit" className="bg-sky-950 p-5 w-full mt-5 transition-colors	 hover:bg-sky-700">
-            Enviar
+            Cadastrar
           </button>
         </div>
       </form>
